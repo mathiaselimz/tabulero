@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <title>Dashboard | Tabulero</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <!-- Your Firebase Config -->
   <script src="firebase-config.js"></script>
 </head>
 <body>
-  <h2>Welcome to your Tabulero Dashboard</h2>
+  <h2>Welcome to Your Dashboard</h2>
   <p id="user-email"></p>
   <button onclick="logout()">Logout</button>
 
@@ -18,16 +22,14 @@
 
     auth.onAuthStateChanged((user) => {
       if (!user) {
-        window.location.href = "index.html"; // redirect if not logged in
+        window.location.href = "index.html";
       } else {
         document.getElementById("user-email").innerText = `Logged in as: ${user.email}`;
       }
     });
 
     function logout() {
-      auth.signOut().then(() => {
-        window.location.href = "index.html";
-      });
+      auth.signOut().then(() => window.location.href = "index.html");
     }
   </script>
 </body>
