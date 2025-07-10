@@ -8,9 +8,7 @@ function login() {
     .then(() => {
       window.location.href = "dashboard.html";
     })
-    .catch((error) => {
-      alert(error.message);
-    });
+    .catch((error) => alert(error.message));
 }
 
 function signup() {
@@ -21,7 +19,10 @@ function signup() {
     .then(() => {
       window.location.href = "dashboard.html";
     })
-    .catch((error) => {
-      alert(error.message);
-    });
+    .catch((error) => alert(error.message));
 }
+
+// ✅ Make functions visible to HTML buttons
+window.login = login;
+window.signup = signup;
+

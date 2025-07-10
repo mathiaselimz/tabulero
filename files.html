@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>File Sharing | Tabulero</title>
+  <link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="images/favicon.png" type="image/png" />
+
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>File Sharing</h2>
+    <input type="file" id="fileInput" />
+    <button onclick="uploadFile()">Upload</button>
+
+    <h3>Uploaded Files</h3>
+    <ul id="fileList"></ul>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const auth = firebase.auth();
+    const storage = firebase.storage();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "index.html";
+      } else {
+        loadFiles(user.uid);
+      }
+    });
+
+    function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a file first.");
+        return;
+      }
+      const user = auth.currentUser;
+      const storageRef = storage.ref(`${user.uid}/${file.name}`);
+
+      storageRef.put(file).then(() => {
+        alert('Upload successful!');
+        saveFileRecord(user.uid, file.name);
+        fileInput.value = '';
+        loadFiles(user.uid);
+      }).catch(console.error);
+    }
+
+    function saveFileRecord(userId, fileName) {
+      db.collection('files').add({
+        userId,
+        fileName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+
+    function loadFiles(userId) {
+      const fileList = document.getElementById('fileList');
+      fileList.innerHTML = '';
+
+      db.collection('files')
+        .where('userId', '==', userId)
+        .orderBy('timestamp', 'desc')
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const li = document.createElement('li');
+
+            const link = document.createElement('a');
+            link.textContent = data.fileName;
+            const fileRef = storage.ref(`${userId}/${data.fileName}`);
+
+            fileRef.getDownloadURL().then(url => {
+              link.href = url;
+              link.target = "_blank";
+            }).catch(() => {
+              link.textContent += ' (unavailable)';
+              link.href = '#';
+              link.style.color = '#888';
+            });
+
+            li.appendChild(link);
+            fileList.appendChild(li);
+          });
+        });
+    }
+
+    function logout() {
+      auth.signOut().then(() => window.location.href = 'index.html');
+    }
+  </script>
+</body>
+</html>

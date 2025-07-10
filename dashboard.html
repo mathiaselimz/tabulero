@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard | Tabulero</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
+	<link rel="icon" href="images/favicon.png" type="image/png" />
+
 
   <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-  <!-- Your Firebase Config -->
+	
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="firebase-config.js"></script>
 </head>
 <body>
-  <h2>Welcome to Your Dashboard</h2>
-  <p id="user-email"></p>
-  <button onclick="logout()">Logout</button>
+
+  <div class="container">
+    <img src="images/logo.png" alt="Tabulero Logo" class="logo" />
+    <div class="dashboard-card">
+      <h2>Welcome to your Dashboard</h2>
+      <p id="user-email" class="user-email"></p>
+	<button onclick="goToFiles()">File Sharing</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
 
   <script>
     const auth = firebase.auth();
@@ -31,6 +40,10 @@
     function logout() {
       auth.signOut().then(() => window.location.href = "index.html");
     }
+	function goToFiles() {
+    window.location.href = "files.html";
+  }
   </script>
+
 </body>
 </html>
