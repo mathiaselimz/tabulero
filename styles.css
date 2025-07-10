@@ -52,4 +52,8 @@ button:hover {
   font-size: 1.1rem;
   color: #FDFCFB;
 }
+.logo {
+  max-width: 160px;
+  margin-bottom: 20px;
+}
 
