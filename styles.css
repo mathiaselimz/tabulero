@@ -1,59 +1,101 @@
-/* Base layout */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #1E1E1E; /* Charcoal */
-  color: #FDFCFB; /* Ivory */
-  text-align: center;
-  padding-top: 60px;
-  margin: 0;
-}
-
-/* Headings */
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #FF6B6B; /* Coral */
-}
-
-/* Input fields */
-input {
-  margin: 10px 5px;
-  padding: 12px 15px;
-  width: 260px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background-color: #2D2D2D;
+  background-color: #1E1E1E;
   color: #FDFCFB;
-  outline: none;
-  box-shadow: 0 0 0 1px #444 inset;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-/* Buttons */
-button {
-  margin: 10px 5px;
-  padding: 12px 25px;
-  font-size: 16px;
-  background-color: #FF6B6B; /* Coral */
-  color: white;
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.logo {
+  max-width: 140px;
+  margin-bottom: 10px;
+  animation: fadeIn 1s ease;
+}
+
+.tagline {
+  color: #ccc;
+  font-style: italic;
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.login-card {
+  background-color: #2D2D2D;
+  padding: 40px;
+  max-width: 360px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.6s ease-out;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
   border: none;
   border-radius: 6px;
+  background-color: #1E1E1E;
+  color: #FDFCFB;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #FF6B6B;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 button:hover {
-  background-color: #ff4949;
+  transform: scale(1.05);
+  background-color: #ff5050;
 }
 
-/* Dashboard styling */
-#user-email {
-  margin-top: 20px;
-  font-size: 1.1rem;
-  color: #FDFCFB;
+.forgot-password {
+  margin-top: 15px;
 }
-.logo {
-  max-width: 160px;
-  margin-bottom: 20px;
+
+.forgot-password a {
+  color: #FF6B6B;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* Optional animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 

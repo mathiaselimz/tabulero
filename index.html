@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | Tabulero</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-
-  <!-- Your Firebase Config -->
   <script src="firebase-config.js"></script>
 </head>
 <body>
-	<img src="images/logo.png" alt="Tabulero Logo" class="logo">
+  <div class="container">
+    <img src="images/logo.png" alt="Tabulero Logo" class="logo" />
+    <p class="tagline">Your clients. Your space. Powered by Tabulero.</p>
 
-  <h2>Welcome to Tabulero</h2>
+    <div class="login-card">
+      <h2>Welcome Back</h2>
 
-  <div>
-    <input id="email" type="email" placeholder="Email" />
-    <br>
-    <input id="password" type="password" placeholder="Password" />
-    <br>
-    <button onclick="login()">Login</button>
-    <button onclick="signup()">Sign Up</button>
+      <input id="email" type="email" placeholder="Email" />
+      <input id="password" type="password" placeholder="Password" />
+      
+      <button onclick="login()">Login</button>
+      <button onclick="signup()">Sign Up</button>
+
+      <p class="forgot-password"><a href="#">Forgot your password?</a></p>
+    </div>
   </div>
 
   <script src="auth.js"></script>
 </body>
 </html>
+
