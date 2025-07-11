@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password | Tabulero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Reset Your Password</h2>
+    <input id="reset-email" type="email" placeholder="Enter your email" />
+    <button onclick="sendResetEmail()">Send Reset Link</button>
+    <div id="reset-message" class="error-box" style="display: none;"></div>
+  </div>
+
+  <script>
+    const auth = firebase.auth();
+
+    function sendResetEmail() {
+      const email = document.getElementById("reset-email").value;
+      const messageBox = document.getElementById("reset-message");
+
+      auth.sendPasswordResetEmail(email)
+        .then(() => {
+          messageBox.innerText = "✅ Check your email for a reset link!";
+          messageBox.style.display = "block";
+          messageBox.style.backgroundColor = "#233"; // optional styling tweak
+        })
+        .catch((error) => {
+          messageBox.innerText = error.message;
+          messageBox.style.display = "block";
+        });
+    }
+  </script>
+</body>
+</html>
