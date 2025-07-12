@@ -8,7 +8,104 @@
   <link rel="icon" href="images/favicon.png" type="image/png" />
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <script src="firebase-config.js"></script>
+  <style>
+    /* Inline styles specific to messages UI */
+.messages-container {
+  max-width: 900px;      /* was 600px */
+  margin: 40px auto;
+  background: #fdf5e6;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  color: #2c2c2e;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+    #client-select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .message-list {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #d9673c;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fffaf3;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .message-item {
+      max-width: 75%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      word-wrap: break-word;
+      line-height: 1.3;
+    }
+
+    .message-sent {
+      background-color: #d9673c;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .message-received {
+      background-color: #f1f1f1;
+      color: #2c2c2e;
+      align-self: flex-start;
+    }
+
+    #message-form {
+      display: flex;
+      gap: 10px;
+    }
+#message-input {
+  flex-grow: 1;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.05rem;
+  resize: vertical;
+  min-height: 50px;
+  max-height: 150px;
+}
+
+
+      #message-form button {
+      background-color: #d9673c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    #message-form button:hover {
+      background-color: #b4502a;
+    }
+
+    /* Ensure main content area scrolls if content is long */
+    main.main-content {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 40px;
+      background-color: #fdf5e6;
+      display: flex;
+      justify-content: center; /* centers the messages container horizontally */
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard-container">
@@ -25,31 +122,25 @@
     </aside>
 
     <main class="main-content">
-      <div class="top-bar">
-        <h1 class="page-title">Messages</h1>
-        <button class="invite-btn">New Message</button>
-      </div>
+      <div class="messages-container">
+        <h2>Messages</h2>
 
-      <div class="cards">
-        <div class="card">
-          <h2>Inbox</h2>
-          <ul class="activity-list">
-            <li><span class="dot green"></span> Jane Smith: Hi! Looking forward to our meeting.</li>
-            <li><span class="dot green"></span> Alex Graver: Can you send the files?</li>
-            <li><span class="dot green"></span> Richard Hang: Invoice received, thanks!</li>
-          </ul>
-        </div>
+        <label for="client-select">Select Client:</label>
+        <select id="client-select">
+          <option value="">-- Select a client --</option>
+        </select>
+
+        <div id="message-list" class="message-list"></div>
+
+        <form id="message-form">
+        <textarea id="message-input" placeholder="Type your message..." rows="2"></textarea>
+          <button type="submit">Send</button>
+        </form>
       </div>
     </main>
   </div>
 
-  <script>
-    const auth = firebase.auth();
-    auth.onAuthStateChanged((user) => {
-      if (!user) {
-        window.location.href = "index.html";
-      }
-    });
-  </script>
+  <script src="messages.js"></script>
 </body>
 </html>
+
