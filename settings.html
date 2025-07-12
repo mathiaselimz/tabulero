@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings | Tabulero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <script src="firebase-config.js"></script>
+  <style>
+    /* Additional styles for form elements on settings page */
+    form {
+      margin-top: 20px;
+    }
+    fieldset {
+      border: 1px solid #d9673c;
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      background: #fffaf3;
+      color: #2c2c2e;
+    }
+    legend {
+      font-weight: bold;
+      color: #d9673c;
+      padding: 0 10px;
+      font-size: 1.1rem;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    textarea {
+      resize: vertical;
+    }
+    input[type="file"] {
+      margin-top: 8px;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 24px;
+      transition: 0.4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+    input:checked + .slider {
+      background-color: #d9673c;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    button.save-btn {
+      background-color: #d9673c;
+      color: #fffaf3;
+      padding: 12px 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+    button.save-btn:hover {
+      background-color: #b4502a;
+    }
+  </style>
+</head>
+<body class="settings-page">
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">Tabulero</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="clients.html">Clients</a>
+        <a href="files.html">Files</a>
+        <a href="messages.html">Messages</a>
+        <a href="invoices.html">Invoices</a>
+        <a href="settings.html" class="active">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="top-bar">
+        <h1 class="page-title">Settings</h1>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h2>Account Settings</h2>
+          <form id="account-settings-form">
+            <fieldset>
+              <legend>Profile Settings</legend>
+              <label for="display-name">Display Name</label>
+              <input type="text" id="display-name" name="displayName" placeholder="Your name" />
+
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" />
+
+              <label for="profile-picture">Profile Picture</label>
+     <input type="file" id="profile-picture" name="profilePicture" accept="image/*" />
+
+              <label for="password">Change Password</label>
+              <input type="password" id="password" name="password" placeholder="New password" />
+
+              <label for="timezone">Timezone</label>
+              <select id="timezone" name="timezone">
+                <option value="UTC-12">UTC-12</option>
+                <option value="UTC-11">UTC-11</option>
+                <option value="UTC-10">UTC-10</option>
+                <option value="UTC-9">UTC-9</option>
+                <option value="UTC-8">UTC-8</option>
+                <option value="UTC-7">UTC-7</option>
+                <option value="UTC-6">UTC-6</option>
+                <option value="UTC-5" selected>UTC-5 (Eastern Time)</option>
+                <option value="UTC-4">UTC-4</option>
+                <option value="UTC-3">UTC-3</option>
+                <option value="UTC-2">UTC-2</option>
+                <option value="UTC-1">UTC-1</option>
+                <option value="UTC+0">UTC+0 (GMT)</option>
+                <option value="UTC+1">UTC+1</option>
+                <option value="UTC+2">UTC+2</option>
+                <option value="UTC+3">UTC+3</option>
+                <option value="UTC+4">UTC+4</option>
+                <option value="UTC+5">UTC+5</option>
+                <option value="UTC+6">UTC+6</option>
+                <option value="UTC+7">UTC+7</option>
+                <option value="UTC+8">UTC+8</option>
+                <option value="UTC+9">UTC+9</option>
+                <option value="UTC+10">UTC+10</option>
+                <option value="UTC+11">UTC+11</option>
+                <option value="UTC+12">UTC+12</option>
+              </select>
+            </fieldset>
+
+            <fieldset>
+              <legend>Portal Branding</legend>
+              <label for="logo-upload">Upload Logo</label>
+       <input type="file" id="logo-upload" name="logoUpload" accept="image/*" />
+
+              <label for="primary-color">Primary Color</label>
+              <input type="color" id="primary-color" name="primaryColor" value="#d9673c" />
+
+              <label for="secondary-color">Secondary Color</label>
+              <input type="color" id="secondary-color" name="secondaryColor" value="#2d2e2e" />
+
+              <label for="welcome-message">Welcome Message</label>
+              <textarea id="welcome-message" name="welcomeMessage" rows="3" placeholder="Welcome your clients!"></textarea>
+
+              <label for="footer-text">Footer Text / Disclaimer</label>
+              <textarea id="footer-text" name="footerText" rows="2" placeholder="Add footer or disclaimers here"></textarea>
+            </fieldset>
+
+            <fieldset>
+              <legend>Notification Preferences</legend>
+              <label>Email Notifications</label>
+              <label>New client signups
+                <span class="toggle-switch">
+                  <input type="checkbox" name="notifClientSignup" checked />
+                  <span class="slider"></span>
+                </span>
+              </label>
+
+              <label>Client messages
+                <span class="toggle-switch">
+                  <input type="checkbox" name="notifMessages" checked />
+                  <span class="slider"></span>
+                </span>
+              </label>
+
+              <label>Invoice sent/paid alerts
+                <span class="toggle-switch">
+                  <input type="checkbox" name="notifInvoices" checked />
+                  <span class="slider"></span>
+                </span>
+              </label>
+
+              <label>Task completions
+                <span class="toggle-switch">
+                  <input type="checkbox" name="notifTasks" />
+                  <span class="slider"></span>
+                </span>
+              </label>
+
+              <label for="notif-frequency">Notification Frequency</label>
+              <select id="notif-frequency" name="notifFrequency">
+                <option value="immediate" selected>Immediate</option>
+                <option value="daily">Daily Digest</option>
+                <option value="weekly">Weekly Digest</option>
+              </select>
+            </fieldset>
+
+            <fieldset>
+              <legend>User Management</legend>
+              <p>Manage your team members and permissions.</p>
+              <button type="button" class="save-btn" disabled>Add/Remove Team Members (Coming Soon)</button>
+              <label for="user-role">Set default user role</label>
+              <select id="user-role" name="userRole" disabled>
+                <option>Admin</option>
+                <option>Editor</option>
+                <option>Viewer</option>
+              </select>
+            </fieldset>
+
+            <fieldset>
+              <legend>Security Settings</legend>
+              <label>Enable Two-Factor Authentication (2FA)
+                <span class="toggle-switch">
+                  <input type="checkbox" name="enable2fa" />
+                  <span class="slider"></span>
+                </span>
+              </label>
+
+              <label>Session Timeout (minutes)
+                <select name="sessionTimeout" id="session-timeout">
+                  <option value="5">5</option>
+                  <option value="10" selected>10</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="60">60</option>
+                </select>
+              </label>
+
+              <button type="button" class="save-btn" disabled>View Recent Login Activity (Coming Soon)</button>
+            </fieldset>
+
+            <fieldset>
+              <legend>Integrations</legend>
+              <p>Connect your favorite services.</p>
+
+              <label for="payment-processor">Payment Processor</label>
+              <select id="payment-processor" name="paymentProcessor">
+                <option value="" selected>None</option>
+                <option value="stripe">Stripe</option>
+                <option value="paypal">PayPal</option>
+              </select>
+
+              <label for="cloud-storage">Cloud Storage</label>
+              <select id="cloud-storage" name="cloudStorage">
+                <option value="" selected>None</option>
+                <option value="google-drive">Google Drive</option>
+                <option value="dropbox">Dropbox</option>
+              </select>
+
+              <label for="email-marketing">Email Marketing Tool</label>
+              <select id="email-marketing" name="emailMarketing">
+                <option value="" selected>None</option>
+                <option value="mailchimp">Mailchimp</option>
+                <option value="sendgrid">SendGrid</option>
+              </select>
+            </fieldset>
+
+            <fieldset>
+              <legend>Billing & Subscription</legend>
+              <p>Manage your subscription and billing details.</p>
+              <button type="button" class="save-btn" disabled>View Subscription Plan (Coming Soon)</button>
+              <button type="button" class="save-btn" disabled>Update Payment Method (Coming Soon)</button>
+              <button type="button" class="save-btn" disabled>Download Invoices (Coming Soon)</button>
+              <button type="button" class="save-btn" disabled>Cancel / Upgrade Subscription (Coming Soon)</button>
+            </fieldset>
+
+            <fieldset>
+              <legend>Customization</legend>
+              <label for="invitation-email">Client Invitation Email Template</label>
+              <textarea id="invitation-email" name="invitationEmail" rows="4" placeholder="Customize your client invite email here"></textarea>
+
+              <label for="default-client-permissions">Default Client Permissions</label>
+              <select id="default-client-permissions" name="defaultClientPermissions">
+                <option value="read-only" selected>Read Only</option>
+                <option value="comment">Comment</option>
+                <option value="edit">Edit</option>
+              </select>
+
+              <label for="default-folder-settings">Default Folder Sharing Settings</label>
+              <select id="default-folder-settings" name="defaultFolderSettings">
+                <option value="private" selected>Private</option>
+                <option value="shared">Shared with Clients</option>
+                <option value="public">Public</option>
+              </select>
+            </fieldset>
+
+            <button type="submit" class="save-btn">Save Settings</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<script src="settings.js"></script>
+
+</body>
+</html>
+
+</body>
+</html>
+

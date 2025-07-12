@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invoices | Tabulero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">Tabulero</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="clients.html">Clients</a>
+        <a href="files.html">Files</a>
+        <a href="messages.html">Messages</a>
+        <a href="invoices.html" class="active">Invoices</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="top-bar">
+        <h1 class="page-title">Invoices</h1>
+        <button class="invite-btn">Create Invoice</button>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h2>Recent Invoices</h2>
+          <ul class="activity-list">
+            <li>Invoice #1001 - Sent to Alex Graver - <strong>Paid</strong></li>
+            <li>Invoice #1002 - Sent to Jane Smith - <strong>Pending</strong></li>
+            <li>Invoice #1003 - Sent to Richard Hang - <strong>Overdue</strong></li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const auth = firebase.auth();
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>

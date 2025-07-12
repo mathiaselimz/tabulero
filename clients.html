@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | Tabulero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clients | Tabulero</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -12,44 +12,33 @@
 </head>
 <body>
   <div class="dashboard-container">
-    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">Tabulero</div>
-<nav>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="clients.html">Clients</a>
-  <a href="files.html">Files</a>
-  <a href="messages.html">Messages</a>
-  <a href="invoices.html">Invoices</a>
-  <a href="settings.html">Settings</a>
-</nav>
-
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="clients.html" class="active">Clients</a>
+        <a href="files.html">Files</a>
+        <a href="messages.html">Messages</a>
+        <a href="invoices.html">Invoices</a>
+        <a href="settings.html">Settings</a>
+      </nav>
     </aside>
 
-    <!-- Main content -->
     <main class="main-content">
       <div class="top-bar">
-        <h1 class="page-title">Dashboard</h1>
+        <h1 class="page-title">Clients</h1>
         <button class="invite-btn">Invite Client</button>
       </div>
 
       <div class="cards">
         <div class="card">
-          <h2>Clients</h2>
+          <h2>Client List</h2>
           <ul class="client-list">
             <li>Alex Graver</li>
             <li>Alex Andres</li>
             <li>John Arister</li>
             <li>Richard Hang</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>Recent Activity</h2>
-          <ul class="activity-list">
-            <li><span class="dot green"></span> Completed a task</li>
-            <li><span class="dot green"></span> Jane Smith • New client</li>
-            <li><span class="dot green"></span> Invoice #1001 • Sent</li>
+            <!-- Add your clients here -->
           </ul>
         </div>
       </div>
@@ -66,7 +55,3 @@
   </script>
 </body>
 </html>
-
-
-
-
