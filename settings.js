@@ -156,3 +156,19 @@ firebase.auth().onAuthStateChanged(user => {
     console.log('No user logged in');
   }
 });
+// Your existing onAuthStateChanged code ...
+
+// Your existing save form submission listener ...
+
+// Add this at the end:
+document.getElementById('logout-btn').addEventListener('click', () => {
+  firebase.auth().signOut()
+    .then(() => {
+      window.location.href = 'index.html';
+    })
+    .catch((error) => {
+      console.error('Error signing out:', error);
+      alert('Failed to log out. Please try again.');
+    });
+});
+
