@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>File Sharing | Tabulero</title>
   <link rel="stylesheet" href="styles.css" />
-<link rel="icon" href="images/favicon.png" type="image/png" />
-
+  <link rel="icon" href="images/favicon.png" type="image/png" />
 
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -15,15 +14,29 @@
   <script src="firebase-config.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h2>File Sharing</h2>
-    <input type="file" id="fileInput" />
-    <button onclick="uploadFile()">Upload</button>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">Tabulero</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="clients.html">Clients</a>
+        <a href="files.html" class="active">Files</a>
+        <a href="messages.html">Messages</a>
+        <a href="invoices.html">Invoices</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </aside>
 
-    <h3>Uploaded Files</h3>
-    <ul id="fileList"></ul>
+    <main class="main-content">
+      <h2>File Sharing</h2>
+      <input type="file" id="fileInput" />
+      <button onclick="uploadFile()">Upload</button>
 
-    <button onclick="logout()">Logout</button>
+      <h3>Uploaded Files</h3>
+      <ul id="fileList"></ul>
+
+      <button onclick="logout()">Logout</button>
+    </main>
   </div>
 
   <script>
@@ -103,3 +116,4 @@
   </script>
 </body>
 </html>
+
