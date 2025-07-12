@@ -1,0 +1,15 @@
+Problem: Freelancers often manage client communication across messy email threads, Google Docs, Dropbox links, and shared folders. Chaotic and unprofessional.
+
+Solution: share project status, links and notes 
+gives clients a read-only page to view progress 
+keep everything in one clean space.
+Name: Brisario
+
+Tagline: “Effortless client portals. Built to impress.”
+
+Subheading: Create beautiful, branded client spaces your customers actually enjoy using.
+:root {
+  --charcoal: #2d2e2e;
+  --clay: #d9673c;
+  --sand: #fdf5e6;
+  --light: #fffaf3;

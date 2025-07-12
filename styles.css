@@ -12,15 +12,20 @@ body {
 }
 
 .container {
-  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
+  text-align: center;
 }
 
+
 .logo {
-  max-width: 140px;
-  margin-bottom: 10px;
-  animation: fadeIn 1s ease;
+  width: 140px;
+  height: auto;
+  display: block;
+  margin: 30px auto 10px auto;
 }
+
 
 .tagline {
   color: #ccc;
@@ -270,34 +275,40 @@ body {
 
   .sidebar {
     width: 100%;
+    padding: 10px 20px;
     text-align: center;
+  }
+
+  .sidebar .logo {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
   }
 
   .sidebar nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
   }
 
   .main-content {
     padding: 20px;
-	
   }
 
   .top-bar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
 
   .invite-btn {
-    margin-top: 15px;
     width: 100%;
     text-align: center;
   }
 
   .cards {
     flex-direction: column;
+    gap: 20px;
   }
 
   .card {
